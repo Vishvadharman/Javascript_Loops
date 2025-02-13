@@ -1,39 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Loops Tasks</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        input, button {
-            margin: 10px;
-            padding: 5px;
-        }
-        #output {
-            margin-top: 20px;
-            text-align: left;
-            display: inline-block;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Loops Tasks</title>
+  <style>
+    /* Reset and Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #ffffff);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      width: 100%;
+      max-width: 800px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00796b;
+    }
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #00796b;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 5px;
+    }
+    input[type="number"] {
+      padding: 10px;
+      margin: 10px 0;
+      width: 60%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px 0;
+      border: none;
+      background-color: #00796b;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #00574b;
+    }
+    p {
+      margin: 10px 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    /* Output Styling */
+    #numListOutput,
+    #multOutput,
+    #guessOutput,
+    #evenOutput,
+    #oddOutput,
+    #fiboOutput,
+    #primeOutput,
+    #reverseOutput {
+      margin-top: 10px;
+      background: #f1f1f1;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
 <body>
-
+  <div class="container">
     <h1>JavaScript Loops Tasks</h1>
 
     <!-- Task 1: Number List -->
     <h3>1. Number List (For Loop)</h3>
-    <input type="number" id="numListInput" placeholder="Enter a number">
+    <input type="number" id="numListInput" placeholder="Enter a number" />
     <button onclick="generateNumberList()">Generate List</button>
     <p id="numListOutput"></p>
 
     <!-- Task 2: Multiplication Table -->
     <h3>2. Multiplication Table (While Loop)</h3>
-    <input type="number" id="multInput" placeholder="Enter a number">
+    <input type="number" id="multInput" placeholder="Enter a number" />
     <button onclick="generateMultiplicationTable()">Show Table</button>
     <p id="multOutput"></p>
 
@@ -44,104 +108,107 @@
 
     <!-- Task 4: Even and Odd Numbers -->
     <h3>4. Even and Odd Numbers (For Loop)</h3>
-    <input type="number" id="evenOddInput" placeholder="Enter a number">
+    <input type="number" id="evenOddInput" placeholder="Enter a number" />
     <button onclick="generateEvenOdd()">Generate</button>
     <p><strong>Even Numbers:</strong> <span id="evenOutput"></span></p>
     <p><strong>Odd Numbers:</strong> <span id="oddOutput"></span></p>
 
     <!-- Task 5: Fibonacci Series -->
     <h3>5. Fibonacci Series (For Loop)</h3>
-    <input type="number" id="fiboInput" placeholder="Enter N">
+    <input type="number" id="fiboInput" placeholder="Enter N" />
     <button onclick="generateFibonacci()">Generate</button>
     <p id="fiboOutput"></p>
 
     <!-- Task 6: Prime Numbers -->
     <h3>6. Prime Numbers (For Loop)</h3>
-    <input type="number" id="primeInput" placeholder="Enter a number">
+    <input type="number" id="primeInput" placeholder="Enter a number" />
     <button onclick="findPrimes()">Find Primes</button>
     <p id="primeOutput"></p>
 
     <!-- Task 7: Reverse a Number -->
     <h3>7. Reverse a Number (Do-While Loop)</h3>
-    <input type="number" id="reverseInput" placeholder="Enter a number">
+    <input type="number" id="reverseInput" placeholder="Enter a number" />
     <button onclick="reverseNumber()">Reverse</button>
     <p id="reverseOutput"></p>
+  </div>
 
-    <script>
-        function generateNumberList() {
-            let n = parseInt(document.getElementById("numListInput").value);
-            let output = "";
-            for (let i = 1; i <= n; i++) {
-                output += i + " ";
-            }
-            document.getElementById("numListOutput").innerText = output;
+  <script>
+    function generateNumberList() {
+      let n = parseInt(document.getElementById("numListInput").value);
+      let output = "";
+      for (let i = 1; i <= n; i++) {
+        output += i + " ";
+      }
+      document.getElementById("numListOutput").innerText = output;
+    }
+
+    function generateMultiplicationTable() {
+      let num = parseInt(document.getElementById("multInput").value);
+      let i = 1,
+        output = "";
+      while (i <= 10) {
+        output += `${num} x ${i} = ${num * i}\n`;
+        i++;
+      }
+      document.getElementById("multOutput").innerText = output;
+    }
+
+    function startGuessingGame() {
+      let randomNumber = Math.floor(Math.random() * 10) + 1;
+      let guess;
+      do {
+        guess = parseInt(prompt("Guess a number between 1 and 10:"));
+      } while (guess !== randomNumber);
+      document.getElementById("guessOutput").innerText =
+        "Congratulations! You guessed it right.";
+    }
+
+    function generateEvenOdd() {
+      let n = parseInt(document.getElementById("evenOddInput").value);
+      let evens = "",
+        odds = "";
+      for (let i = 1; i <= n; i++) {
+        if (i % 2 === 0) evens += i + " ";
+        else odds += i + " ";
+      }
+      document.getElementById("evenOutput").innerText = evens;
+      document.getElementById("oddOutput").innerText = odds;
+    }
+
+    function generateFibonacci() {
+      let n = parseInt(document.getElementById("fiboInput").value);
+      let fib = [0, 1];
+      for (let i = 2; i < n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+      }
+      document.getElementById("fiboOutput").innerText = fib.slice(0, n).join(", ");
+    }
+
+    function findPrimes() {
+      let n = parseInt(document.getElementById("primeInput").value);
+      let primes = [];
+      for (let i = 2; i <= n; i++) {
+        let isPrime = true;
+        for (let j = 2; j * j <= i; j++) {
+          if (i % j === 0) {
+            isPrime = false;
+            break;
+          }
         }
+        if (isPrime) primes.push(i);
+      }
+      document.getElementById("primeOutput").innerText = primes.join(", ");
+    }
 
-        function generateMultiplicationTable() {
-            let num = parseInt(document.getElementById("multInput").value);
-            let i = 1, output = "";
-            while (i <= 10) {
-                output += `${num} x ${i} = ${num * i}\n`;
-                i++;
-            }
-            document.getElementById("multOutput").innerText = output;
-        }
-
-        function startGuessingGame() {
-            let randomNumber = Math.floor(Math.random() * 10) + 1;
-            let guess;
-            do {
-                guess = parseInt(prompt("Guess a number between 1 and 10:"));
-            } while (guess !== randomNumber);
-            document.getElementById("guessOutput").innerText = "Congratulations! You guessed it right.";
-        }
-
-        function generateEvenOdd() {
-            let n = parseInt(document.getElementById("evenOddInput").value);
-            let evens = "", odds = "";
-            for (let i = 1; i <= n; i++) {
-                if (i % 2 === 0) evens += i + " ";
-                else odds += i + " ";
-            }
-            document.getElementById("evenOutput").innerText = evens;
-            document.getElementById("oddOutput").innerText = odds;
-        }
-
-        function generateFibonacci() {
-            let n = parseInt(document.getElementById("fiboInput").value);
-            let fib = [0, 1];
-            for (let i = 2; i < n; i++) {
-                fib[i] = fib[i - 1] + fib[i - 2];
-            }
-            document.getElementById("fiboOutput").innerText = fib.slice(0, n).join(", ");
-        }
-
-        function findPrimes() {
-            let n = parseInt(document.getElementById("primeInput").value);
-            let primes = [];
-            for (let i = 2; i <= n; i++) {
-                let isPrime = true;
-                for (let j = 2; j * j <= i; j++) {
-                    if (i % j === 0) {
-                        isPrime = false;
-                        break;
-                    }
-                }
-                if (isPrime) primes.push(i);
-            }
-            document.getElementById("primeOutput").innerText = primes.join(", ");
-        }
-
-        function reverseNumber() {
-            let num = parseInt(document.getElementById("reverseInput").value);
-            let rev = 0;
-            do {
-                rev = rev * 10 + (num % 10);
-                num = Math.floor(num / 10);
-            } while (num > 0);
-            document.getElementById("reverseOutput").innerText = rev;
-        }
-    </script>
-
+    function reverseNumber() {
+      let num = parseInt(document.getElementById("reverseInput").value);
+      let rev = 0;
+      do {
+        rev = rev * 10 + (num % 10);
+        num = Math.floor(num / 10);
+      } while (num > 0);
+      document.getElementById("reverseOutput").innerText = rev;
+    }
+  </script>
 </body>
 </html>
